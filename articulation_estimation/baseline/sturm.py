@@ -2,19 +2,18 @@ import enum
 import functools
 from typing import Dict, List, Tuple  # Any, Callable, Optional, Tuple, NamedTuple
 
-import helpers
+import articulation_estimation.helpers as helpers
 import jax
 import jax.numpy as jnp
 import jaxlie
 import numpy as onp
 import jax.scipy.optimize
 import jaxlie
-from baseline import joints
+from articulation_estimation.baseline import joints
 import sturm_articulation
 
 from scipy import optimize
 
-from baseline import joints
 
 # JointTypesToUse = [joints.RigidJoint, joints.PrismaticJoint, joints.RevoluteJoint]
 JointTypesToUse = [joints.PrismaticJoint, joints.RevoluteJoint]

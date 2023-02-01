@@ -1,14 +1,14 @@
 import dcargs
-from only_poses.config import FullPoseConfig
-from sample_generator import JointConnection, Sample
-import experiment_files
+from articulation_estimation.only_poses.config import FullPoseConfig
+from articulation_estimation.sample_generator import JointConnection, Sample
+import articulation_estimation.experiment_files as experiment_files
 from typing import List, Dict
 import numpy as onp
-import factor_graph
-import helpers
-from evaluation.eval import Evaluation
-from baseline.joints import TwistJointParameters
-import baseline
+import articulation_estimation.factor_graph as factor_graph
+import articulation_estimation.helpers as helpers
+from articulation_estimation.evaluation.eval import Evaluation
+from articulation_estimation.baseline.joints import TwistJointParameters
+import articulation_estimation.baseline as baseline
 
 
 def optimize_graph(

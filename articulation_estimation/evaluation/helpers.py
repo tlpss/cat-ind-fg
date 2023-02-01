@@ -1,4 +1,4 @@
-import helpers
+import articulation_estimation.helpers as helpers
 import numpy as onp
 from collections import Counter
 import matplotlib.pyplot as plt

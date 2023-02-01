@@ -4,13 +4,13 @@ import math
 from collections import Counter
 from typing import Dict, List
 
-import error
+import articulation_estimation.error as error
 
 # from typing import Set
 import numpy as onp
 import seaborn as sns
 
-import helpers
+import articulation_estimation.helpers as helpers
 
 
 class defaultkeydict(dict):

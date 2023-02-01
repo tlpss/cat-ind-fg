@@ -8,6 +8,12 @@
   <img src="assets/overview.png" alt="Overview" width="500" />
 </p>
 
+---
+
+This fork contains some (non-functional) modifications to the code of the [original code release](https://github.com/SuperN1ck/cat-ind-fg) by @tlpss to make it slightly easier to use the codebase as part of another project. All credits and rights still belong to the original authors.
+
+----
+
 ## 📔 Abstract
 Robots deployed in human-centric environments may need to manipulate a diverse range of articulated objects, such as doors, dishwashers, and cabinets. Articulated objects often come with unexpected articulation mechanisms that are inconsistent with categorical priors: for example, a drawer might rotate about a hinge joint instead of sliding open. We propose a category-independent framework for predicting the articulation models of unknown objects from sequences of RGB-D images. The prediction is performed by a two-step process: first, a visual perception module tracks object part poses from raw images, and second, a factor graph takes these poses and infers the articulation model including the current configuration between the parts as a 6D twist. We also propose a manipulation-oriented metric to evaluate predicted joint twists in terms of how well a compliant robot controller would be able to manipulate the articulated object given the predicted twist. We demonstrate that our visual perception and factor graph modules outperform baselines on simulated data and show the applicability of our factor graph on real world data.
 
@@ -26,12 +32,17 @@ sudo apt-get install -y libsuitesparse-dev libboost-all-dev libcholmod3
 pip install -r requirements.txt
 ```
 
+Then install the local package in editable mode by running following command from the root of this repo
+```
+pip install -e .
+```
+
 *We also highly recommend, if possible, to use JAX with GPU/TPU-support. See the official [Documentation](https://github.com/google/jax#pip-installation-gpu-cuda) for install instructions*
 
 ### Just Part Poses
 We provide a simple example on how to use the factor graph with pre-computed poses in the `only_poses`-directory. To execute the example run
 ```
-python -m only_poses.main \
+python -m articulation_estimation.only_poses.main \
     --experiment-root-path ./experiments/only_poses \ 
     --experiment-name <my_experiment> \ 
     --motion-type <TRANS or ROT> \  # Which motion type we generate examples for
@@ -52,7 +63,7 @@ The script first checks if there are already pre-generated samples available (ov
 
 An example could be
 ```
-python -m only_poses.main \
+python -m articulation_estimation.only_poses.main \
     --experiment-root-path ./experiments/only_poses \
     --experiment-name testing \
     --motion-type TRANS \
@@ -71,7 +82,7 @@ to point to the root of the repository. The notebook automatically gathers all e
 
 Auto-generate commands for sample settings used in the paper through running
 ```
-python -m only_poses.run_all
+python -m articulation_estimation.only_poses.run_all
 ```
 and prints them to the console.
 

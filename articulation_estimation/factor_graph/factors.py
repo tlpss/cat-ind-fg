@@ -8,11 +8,11 @@ import jax_dataclasses
 import jaxfg
 import jaxlie
 import numpy as onp
-from baseline.joints import TwistJoint, TwistJointParameters
+from articulation_estimation.baseline.joints import TwistJoint, TwistJointParameters
 from overrides import overrides
 
-import factor_graph.states as states
-import helpers
+import articulation_estimation.factor_graph.states as states
+import articulation_estimation.helpers as helpers
 
 LatentPoseObservationTuple = Tuple[jaxlie.SE3]
 

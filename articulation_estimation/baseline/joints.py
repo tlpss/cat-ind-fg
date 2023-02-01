@@ -8,7 +8,7 @@ import jax_dataclasses
 import jaxfg
 import jaxlie
 import numpy as onp
-import helpers
+import articulation_estimation.helpers as helpers
 from jax.scipy.optimize import minimize
 from jaxlie import SE3, SO3
 from overrides import EnforceOverrides, overrides

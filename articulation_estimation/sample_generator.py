@@ -11,7 +11,7 @@ import jax_dataclasses
 import numpy as onp
 from jaxlie import SE3, SO3, manifold
 
-from helpers import (
+from articulation_estimation.helpers import (
     MotionType,
     RandomKeyGenerator,
     normalize_twist,

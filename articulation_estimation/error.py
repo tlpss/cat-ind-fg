@@ -5,7 +5,7 @@ import jaxlie
 import numpy as onp
 import jax
 
-import helpers
+import articulation_estimation.helpers as helpers
 
 
 def joint_error(

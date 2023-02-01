@@ -1,7 +1,7 @@
 import enum
 from typing import Dict, NamedTuple
 
-import helpers
+import articulation_estimation.helpers as helpers
 
 import functools
 
@@ -12,9 +12,9 @@ import numpy as onp
 
 import jaxfg
 
-import factor_graph
+import articulation_estimation.factor_graph as factor_graph
 
-from helpers import normalize_twist
+from articulation_estimation.helpers import normalize_twist
 
 
 class JointFormulation(enum.Enum):

@@ -9,20 +9,20 @@ import jaxfg
 import jaxlie
 import numpy as onp
 from jaxfg import geometry
-from sample_generator import JointConnection
-from visualizer import visualize_graph
+from articulation_estimation.sample_generator import JointConnection
+from articulation_estimation.visualizer import visualize_graph
 import copy
 
-import helpers
-from factor_graph import factors as factor_definitions
-from factor_graph import helpers as fg_helpers
-from factor_graph.states import (
+import articulation_estimation.helpers as helpers
+from articulation_estimation.factor_graph import factors as factor_definitions
+from articulation_estimation.factor_graph import helpers as fg_helpers
+from articulation_estimation.factor_graph.states import (
     BaseTransformationVariable,
     JointParametersVariable,
     LatentPoseVariable,
     LatentTransformationVariable,
 )
-from helpers import (
+from articulation_estimation.helpers import (
     MotionType,
     clean_twist,
     get_motion_type_from_twist,

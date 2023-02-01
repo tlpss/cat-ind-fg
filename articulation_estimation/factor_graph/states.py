@@ -12,7 +12,7 @@ from overrides import overrides
 
 from typing import Any
 
-import helpers
+import articulation_estimation.helpers as helpers
 
 
 ## Define some aliases

@@ -17,8 +17,8 @@ from mpl_toolkits.mplot3d import proj3d
 
 import jaxlie
 
-import helpers
-from helpers import MotionType
+from articulation_estimation import helpers
+from articulation_estimation.helpers import MotionType
 
 
 def get_twist_axis_points(twist_, frame):

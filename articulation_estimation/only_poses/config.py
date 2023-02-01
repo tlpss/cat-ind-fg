@@ -3,8 +3,7 @@ import dcargs
 import dataclasses
 from typing import List, Optional
 
-import helpers
-
+import articulation_estimation.helpers as helpers
 
 @dataclasses.dataclass
 class FullPoseConfig:
