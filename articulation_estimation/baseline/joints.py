@@ -243,7 +243,9 @@ class RevoluteJoint(BaseJoint):
             # Rotation axis is the axis with the smallest singular value, ideally dd[2] == 0!
             # Ensure that vv is a right-hand frame
             rot = jnp.cross(vv[:, 0], vv[:, 1])
-            vv = jax.ops.index_update(vv, jax.ops.index[:, 2], rot)
+            # index_update is deprecated and no longer available in jax>=0.2.22
+            #vv = jax.ops.index_update(vv, jax.ops.index[:, 2], rot)
+            vv.at[:, 2].set(rot)
             # print(vv)
 
         # Create a transformation that transforms our points to the svd frame
