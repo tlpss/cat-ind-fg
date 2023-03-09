@@ -295,19 +295,46 @@ class Graph:
         if isinstance(new_variance, float):
             new_variance = new_variance * jnp.ones(noise_dim)
 
-        assert new_variance.shape[-1] == noise_dim
-        new_noises = [
-            jaxfg.noises.HuberWrapper(
-                wrapped=jaxfg.noises.DiagonalGaussian.make_from_covariance(
-                    new_variance
-                ),
-                delta=self.huber_delta
-                if self.huber_delta
-                else 1 / jnp.linalg.norm(new_variance),
-            )
-            if use_huber
-            else jaxfg.noises.DiagonalGaussian.make_from_covariance(new_variance)
-        ] * len(ordered_values)
+        elif isinstance(new_variance, onp.ndarray) or isinstance(new_variance, jnp.ndarray):
+            assert new_variance.shape[-1] == noise_dim
+            new_noises = [
+                jaxfg.noises.HuberWrapper(
+                    wrapped=jaxfg.noises.DiagonalGaussian.make_from_covariance(
+                        new_variance
+                    ),
+                    delta=self.huber_delta
+                    if self.huber_delta
+                    else 1 / jnp.linalg.norm(new_variance),
+                )
+                if use_huber
+                else jaxfg.noises.DiagonalGaussian.make_from_covariance(new_variance)
+            ] * len(ordered_values)
+        elif isinstance(new_variance, dict):
+            # check that all keys to update are in dict
+            assert all(index in new_variance for index in indices_to_update)
+
+            # check that all values have the correct shape
+            for id in indices_to_update:
+                assert new_variance[id].shape[-1] == noise_dim
+            
+            # Just in case order observations as before
+            ordered_variances = [ new_variance[id] for id in indices_to_update]  
+
+            # create a flattened list of T copies of the noise for each item in the dict
+            new_noises = []
+            for variance in ordered_variances:
+                new_noises.extend([
+                    jaxfg.noises.HuberWrapper(
+                        wrapped=jaxfg.noises.DiagonalGaussian.make_from_covariance(
+                            variance
+                        ),
+                        delta=self.huber_delta
+                        if self.huber_delta
+                        else 1 / jnp.linalg.norm(variance),
+                    )
+                    if use_huber
+                    else jaxfg.noises.DiagonalGaussian.make_from_covariance(variance)
+                ] * self.T)
 
         new_noises_stacked = jax.tree_map(  # Flatten them before applying
             lambda *leaves: jnp.vstack(leaves),
